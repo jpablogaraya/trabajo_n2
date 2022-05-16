@@ -9,21 +9,22 @@
         }
     }
 
+    require_once('../admin/conexion.php');
+    $usercredentials=new DB_con();
+
     $usuario = null;
     $contrasena = null;
-    $usuarioValido = null;
-    $usuarioNoValido = null;
 
     if (!empty($_POST)) {
         $usuario = $_POST['usuario'];
         $contrasena = $_POST['contrasena'];
+        $ret=$usercredentials->login($usuario,$contrasena);
+        $num=mysqli_fetch_array($ret);
 
-        if ($usuario == 'admin@admin.cl' && $contrasena == 'mayo') {
-            $usuarioValido = "Usuario válido";
+        if($num>0)
+        {
             $_SESSION["usuario"] = $usuario;
-            header("Location: ../index.php");
-        } else {
-            $usuarioNoValido = "Usuario no válido";
+            echo "<script>window.location.href='../index.php'</script>";
         }
     }
 
@@ -52,55 +53,22 @@
                     <img src="https://investors.togethermoney.com/sites/together-finance/files/together-finance/together-investor-portal/investor-portal.jpg"
                         class="card-img-top" alt="Login">
                     <div class="card-body">
-                        <h5 class="card-title">Login</h5>
+                        <h5 class="card-title">Acceso</h5>
                         <div class="card-text mt-3">
-                            <form action="" method="POST">
-                                <!--
-IMPORTANTES:
-GET - obtener datos y desplegar páginas y formularios
-POST - enviar datos y procesar formularios
+                            <form action="" method="post" id="login">
 
-MENOS IMPORTANTES:
-PUT - actualizar datos
-DELETE - eliminar datos
-                                -->
                                 <div class="mb-3">
                                     <label for="usuario" class="form-label">Usuario</label>
-                                    <input type="email" class="form-control"
-                                            maxlength="100" required
-                                            id="usuario" name="usuario"
-                                            placeholder="name@example.com">
+                                    <input type="email" class="form-control" maxlength="100" required  id="usuario" name="usuario" placeholder="name@example.com">
                                 </div>
                                 <div class="mb-3">
                                     <label for="contrasena" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control"
-                                            maxlength="15" required
-                                            id="contrasena" name="contrasena"
-                                            placeholder="123">
+                                    <input type="password" class="form-control" maxlength="15" required  id="contrasena" name="contrasena" placeholder="123">
                                 </div>
                                 <div class="mb-3">
-                                    <?php
-                                        if (!is_null($usuarioValido)) {
-                                    ?>
-                                        <div class="alert alert-success" role="alert">
-                                            Usuario válido, será redicreccionado/a
-                                        </div>
-                                    <?php
-                                        }
-                                    ?>
-
-                                    <?php
-                                        if (!is_null($usuarioNoValido))   {
-                                    ?>
-                                        <div class="alert alert-danger" role="alert">
-                                            Usuario/a no válido/a, deberá intentar nuevamente.
-                                        </div>
-                                    <?php
-                                        }
-                                    ?>
                                 </div>
                                 <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary" style="float: right;">Ingresar</button>
+                                    <button type="submit" class="btn btn-primary" style="float: right;" name="login">Ingresar</button>
                                 </div>
                             </form>
                         </div>
@@ -108,8 +76,6 @@ DELETE - eliminar datos
                 </div>
             </div>
         </div>
-
-
     </div>
 </body>
-</html>l
+</html>

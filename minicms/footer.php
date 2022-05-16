@@ -23,7 +23,7 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4"><i class="fas fa-gem me-3"></i>Minicms</h6>
-          <p><img src="images/logo_footer.jpeg"></p>
+          <p><img src="https://raw.githubusercontent.com/jpablogaraya/trabajo_n2/99e41f39ceda39e547eec448ce41303a91204135/minicms/images/logo_footer.jpeg"></p>
         </div>
 
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">

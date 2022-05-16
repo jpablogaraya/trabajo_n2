@@ -1,11 +1,7 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['usuario'])) {
-        header("Location: admin/login.php");
-        exit();
-    }
-?>
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +18,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="index.php"><img src="images/logo_header.jpeg"></a>
+    <a class="navbar-brand" href="index.php"><img src="https://github.com/jpablogaraya/trabajo_n2/blob/99e41f39ceda39e547eec448ce41303a91204135/minicms/images/logo_header.jpeg?raw=true"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

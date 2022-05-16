@@ -1,9 +1,12 @@
 <?php
-    session_start();
+
+session_start();
     if (!isset($_SESSION['usuario'])) {
         header("Location: admin/login.php");
         exit();
     }
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +20,8 @@
       <title>MINICMS</title>
 </head>
 <body>
-    <?php include 'header.php' ?>
+<?php include 'header.php' ?>
     <h1>Soy la página principal</h1>
-    <?php include 'footer.php' ?>    
+<?php include 'footer.php' ?>    
 </body>
 </html>
