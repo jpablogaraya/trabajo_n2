@@ -1,5 +1,6 @@
 <?php
-
+ 
+ require_once 'config.ini.php';  
 
 ?>
 <!DOCTYPE html>
@@ -25,17 +26,28 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="index.php">Inicio</a>
+          <a class="nav-link" href="<?php echo $path ?>index.php">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contenidos.php">Contenido</a>
+          <a class="nav-link" href="<?php echo $path ?>contenidos.php">Contenido</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="quienessomos.php">Quienes Somos</a>
+          <a class="nav-link" href="<?php echo $path ?>quienessomos.php">Quienes Somos</a>
+        </li>
+          <?PHP
+            if (isset($_SESSION['usuario'])) {
+          ?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo $path ?>admin/contenidos.php">Administrar Contenidos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="admin/logout.php">Cerrar Sesión</a>
+          <a class="nav-link" href="<?php echo $path ?>admin/logout.php">Cerrar Sesión</a>
         </li>
+          <?PHP
+            }
+          ?>
+        </li>
+
       </ul>
     </div>
   </div>

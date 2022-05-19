@@ -29,9 +29,9 @@
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Navegación</h6>
-          <p><a href="index.php" class="text-reset">Inicio</a></p>
-          <p><a href="contenidos.php" class="text-reset">Contenido</a></p>
-          <p><a href="quienessomos.php" class="text-reset">Quienes Somos</a></p>
+          <p><a href="<?php echo $path ?>index.php" class="text-reset">Inicio</a></p>
+          <p><a href="<?php echo $path ?>contenidos.php" class="text-reset">Contenido</a></p>
+          <p><a href="<?php echo $path ?>quienessomos.php" class="text-reset">Quienes Somos</a></p>
         </div>
         
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

@@ -43,5 +43,14 @@ class DB_con
             $result  = mysqli_query($this->dbh, $query);
             return $result; 
         }
+
+        public function mostrarContenido() {
+            $db = new conexionDB();
+            $sql = "SELECT * FROM contenidos";
+            $resultado = $db->ejecutar_pdo($sql, array());
+            return $resultado;
+        }
+
+
 }
 ?>

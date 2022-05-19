@@ -4,12 +4,12 @@
         if ($_GET["logout"] == 1) {
             session_destroy();
         } else {
-            header("Location: index.php");
+            header("Location: login.php");
             exit();
         }
     }
 
-    require_once('../admin/conexion.php');
+    require_once('conexion.php');
     $usercredentials=new DB_con();
 
     $usuario = null;
@@ -24,7 +24,7 @@
         if($num>0)
         {
             $_SESSION["usuario"] = $usuario;
-            echo "<script>window.location.href='../index.php'</script>";
+            echo "<script>window.location.href='contenidos.php'</script>";
         }
     }
 
@@ -41,6 +41,9 @@
     <title>Login</title>
 </head>
 <body>
+
+    <?php include '../header.php' ?>
+
     <div class="container">
 
         <div class="row" style="margin-top: 15%">
@@ -77,5 +80,8 @@
             </div>
         </div>
     </div>
+
+    <?php include '../footer.php' ?>
+
 </body>
 </html>
