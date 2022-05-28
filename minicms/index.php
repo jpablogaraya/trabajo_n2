@@ -16,6 +16,7 @@
 </head>
 <body>
     <?php include 'header.php' ?>
+    <?php include 'carousel.php' ?>
     <div class="container">
     <hr>
 
@@ -33,7 +34,7 @@
                     <div class="col-sm-8">
                         <div class="well">
                             <h3><?php echo $reg["titulo"]?></h3>
-                            <h6 align="justify"><?php echo $reg["subtitulo"]?></h6>
+                            <h6 align="justify"><?php echo substr($reg["subtitulo"], 0 , 300)."..."?></h6>
                         </div>
                     </div>
                 </div>

@@ -25,13 +25,21 @@ if (!empty($_POST)) {
   $contenido->titulo = $_POST["titulo"];
   $contenido->subtitulo = $_POST["subtitulo"];
   $contenido->contenido = $_POST["contenido"];
-  if ($_POST["idcontenido"] == 0) {
-      //$contenido->agregar();
-  } else {
-      $contenido->modificar();
+  $contenido->modificar();
+
+    header("Location: contenidos.php");
   }
-  //header("Location: contenidos.php");
-}
+
+
+  if(isset($_POST['agregar'])){
+    $idclasificacion  = $_POST['idclasificacion'];
+    $idusuario        = $_SESSION['usuario'];
+    $imagen           = $_POST['imagen'];
+    $titulo           = $_POST['titulo'];
+    $subtitulo        = $_POST['subtitulo'];
+    $contenido        = $_POST["contenido"];
+    agregar();
+    }
 
 ?>
 
@@ -50,6 +58,12 @@ if (!empty($_POST)) {
 
 <body>
   <?php include '../header.php' ?>
+  <?php include '../carousel.php' ?>
+
+  <?php 
+    if ($_GET["idcontenido"] != 0 ) {
+
+  ?>
 
   <div class="container p-3 my-3 border" style="width:50%" id="container">
     <form method="post">
@@ -87,7 +101,53 @@ if (!empty($_POST)) {
     </div>
 
   </div>
-</div>
+
+<?php
+} elseif (($_GET["idcontenido"] == 0 )) {
+?>
+
+<div class="container p-3 my-3 border" style="width:50%" id="container">
+    <form method="post">
+    <input type="hidden" name="idcontenido">
+      <div class="form">
+        <h4>Contenido</h4>
+        <br>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1"><b>Clasificación</b></label>
+          <input type="text" class="form-control" id="idclasificacion" name="idclasificacion">
+        </div>
+        <br>
+          <label for="formGroupExampleInput"><b>Imagen</b></label>
+          <input type="url" class="form-control" id="imagen" name="imagen" placeholder="URL de imágen">
+        <br>
+        <div class="form-group">
+          <label for="formGroupExampleInput"><b>Título</b></label>
+          <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del Contenido">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1"><b>Resumen</b></label>
+          <textarea class="form-control" id="subtitulo" name="subtitulo" rows="5" placeholder="Resumen del Contenido"></textarea>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1"><b>Contenido</b></label>
+          <textarea class="form-control" id="contenido" name="contenido"  rows="5" placeholder="Texto del contenido"></textarea>
+        </div>
+    </form>
+    <br>
+    <div>
+      <a href="contenidos.php" class="btn btn-sm btn-outline-secondary">Cancelar</a>
+      <button name="agregar" type="submit" class="btn btn-sm btn-outline-secondary">Guardar</button>
+    </div>
+
+  </div>
+
+
+<?php 
+}
+?>
+
     <?php include '../footer.php' ?>
 </body>
 

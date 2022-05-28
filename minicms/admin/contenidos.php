@@ -30,10 +30,11 @@
 <body>
 
     <?php include '../header.php' ?>
+    <?php include '../carousel.php' ?>
     <div class="container">
         <br>
         <div id="bottom">
-            <button type="button" class="btn btn-sm btn-outline-primary"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+            <a href="contenido.php?idcontenido=0" class="btn btn-sm btn-outline-primary"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
         </div>
         <br>
         <div class="row">
@@ -53,14 +54,13 @@
                                 </h2>
                             </div>
                             <div class="card-text" align="justify">
-                            <?php echo $reg["subtitulo"]?>
+                            <?php echo substr($reg["subtitulo"], 0 , 300)."..." ?>
                             </div>
                             <br>
                             <div align="center">
-                                <!--<button type="button" class="btn btn-sm btn-outline-success btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>-->
-                                <!--<button type="button" class="btn btn-sm btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></button>-->
                                 <a href="contenido.php?idcontenido=<?php echo $reg["idcontenido"] ?>" class="btn btn-sm btn-outline-success btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                <a href="contenido.php?idcontenido=<?php echo $reg["idcontenido"] ?>" class="btn btn-sm btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a onClick="javascript: return confirm('Desea eliminar el contenido?');"  href="eliminarcontenido.php?idcontenido=<?php echo $reg["idcontenido"] ?>" class="btn btn-sm btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                
                             </div>
                         </div>
                         <br>

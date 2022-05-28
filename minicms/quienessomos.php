@@ -10,6 +10,7 @@
 </head>
 <body>
     <?php include 'header.php' ?>
+    <?php include 'carousel.php' ?>
     <div class="container">
         <div class="row"><h1>Quienes somos</h1></div>
         <div class="row mb-5">

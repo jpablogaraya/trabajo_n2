@@ -11,6 +11,12 @@ class conexionDB {
         }
     }
 
+    public function login($email,$contrasena)
+    {
+    $result=mysqli_query($this->dbh,"select idusuario from usuarios where email='$email' and contrasena='$contrasena'");
+    return $result;
+    }
+
     // PDO - seguro -- USAR
     public function ejecutar_pdo($sql, $parametros)  {
         $resultado = $this->conexion->prepare($sql);

@@ -17,6 +17,7 @@
 <body>
 
     <?php include 'header.php' ?>
+    <?php include 'carousel.php' ?>
     <div class="container">
     <font face = "Comic sans MS" size ="7" ><em>CONTENIDOS</em></font><br />
     <hr>
@@ -34,8 +35,8 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="well">
-                            <h3><?php echo $reg["titulo"]?></h3>
-                            <h6 align="justify"><?php echo $reg["subtitulo"]?></h6>
+                            <a  href="contenido.php?idcontenido=<?php echo $reg["idcontenido"] ?>"><h3><?php echo $reg["titulo"]?></h3></a>
+                            <h6 align="justify"><?php echo substr($reg["subtitulo"], 0 , 300)."..."?></h6>
                         </div>
                     </div>
                 </div>

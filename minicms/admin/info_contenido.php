@@ -15,17 +15,29 @@ class Contenido {
 
     }
 
+    public function setIdContenido($idcontenido)   {
+        $this->idcontenido = $idcontenido;
+        $this->obtener();
+   }
+
+    public function setIdContenido1($idcontenido)   {
+        $this->idcontenido = $idcontenido;
+        $this->MostrarContenido();
+    }
+
+    public function delIdContenido($idcontenido)   {
+        $this->idcontenido = $idcontenido;
+        $this->eliminaContenido();
+    }
+
+
     public function listar() {
         $db = new conexionDB();
-        $sql = "select * from contenidos order by 1 desc LIMIT 5";
+        $sql = "select *  from contenidos order by 1 desc LIMIT 5";
         $resultado = $db->ejecutar_pdo($sql, array());
         return $resultado;
     }
 
-    public function setIdContenido($idcontenido)   {
-        $this->idcontenido = $idcontenido;
-        $this->obtener();
-    }
 
     public function obtener()   {
         $db = new conexionDB();
@@ -54,6 +66,31 @@ class Contenido {
         $db->cerrar();
     }
 
+    public function MostrarContenido()   {
+        $db = new conexionDB();
+        $query = "SELECT imagen, titulo, subtitulo, contenido, cl.nombre clasificacion, u.nombre, u.apellido FROM contenidos c, clasificaciones cl, usuarios u WHERE c.idclasificacion = cl.idclasificacion AND c.autor_idusuario = u.idusuario and idcontenido = ?";
+        $resultado = $db->ejecutar_pdo($query, array($this->idcontenido));
+        if ($resultado->num_rows > 0) {
+            $fila = $resultado->fetch_assoc();
+            $this->imagen           = $fila["imagen"];
+            $this->titulo           = $fila["titulo"];
+            $this->subtitulo        = $fila["subtitulo"];
+            $this->contenido        = $fila["contenido"];
+            $this->clasificacion    = $fila["clasificacion"];
+            $this->nombre           = $fila["nombre"];
+            $this->apellido         = $fila["apellido"];
+        } else {
+            $this->imagen           = null;
+            $this->titulo           = null;
+            $this->subtitulo        = null;
+            $this->contenido        = null;
+            $this->clasificacion    = null;
+            $this->nombre           = null;
+            $this->apellido         = null;
+        }
+        $db->cerrar();
+    }
+
     public function modificar() {
         $db = new conexionDB();
         $query = "UPDATE contenidos SET idclasificacion = ?, imagen = ?, titulo = ?, subtitulo = ?, contenido = ? WHERE idcontenido = ?";
@@ -62,7 +99,29 @@ class Contenido {
         $db->cerrar();
     }
 
+    public function eliminaContenido() {
+        $db = new conexionDB();
+        $query = "DELETE FROM contenidos WHERE idcontenido = ?";
+        $parametros = array($this->idcontenido);
+        $db->ejecutar_pdo($query, $parametros);
+        $db->cerrar();
+    }
 
-}
+    public function agregar() {
+        $db = new conexionDB();
+        $query = "INSERT INTO contenidos (idclasificacion, autor_idusuario, imagen, titulo, subtitulo, contenido) VALUES (1, 1, 'asdf', 'asdf', 'asdf', 'asdf')";
+        $parametros = array($this->idclasificacion, $this->url_imagen, $this->titulo, $this->subtitulo, $this->contenido);
+        echo $this->idclasificacion;
+        echo $this->url_imagen;
+        echo $this->titulo;
+        echo $this->subtitulo;
+        echo $this->contenido;
+        $db->ejecutar_pdo($query, $parametros);
+        $db->cerrar();
+    }
+
+
+
+}   
 
 ?>
