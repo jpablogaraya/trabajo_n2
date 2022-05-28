@@ -6,7 +6,7 @@ class Contenido {
     public $idcontenido;
     public $idclasificacion;
     public $idusuario;
-    public $url_imagen;
+    public $imagen;
     public $titulo;
     public $subtitulo;
     public $contenido;
@@ -107,21 +107,32 @@ class Contenido {
         $db->cerrar();
     }
 
-    public function agregar() {
+    public function agregar($iduser) {
         $db = new conexionDB();
-        $query = "INSERT INTO contenidos (idclasificacion, autor_idusuario, imagen, titulo, subtitulo, contenido) VALUES (1, 1, 'asdf', 'asdf', 'asdf', 'asdf')";
-        $parametros = array($this->idclasificacion, $this->url_imagen, $this->titulo, $this->subtitulo, $this->contenido);
-        echo $this->idclasificacion;
-        echo $this->url_imagen;
-        echo $this->titulo;
-        echo $this->subtitulo;
-        echo $this->contenido;
+        $query = "INSERT INTO contenidos (idclasificacion, autor_idusuario, imagen, titulo, subtitulo, contenido) VALUES (?, (select idusuario from usuarios where email = ?), ?, ?, ? ,?)";
+        $parametros = array($this->idclasificacion, $iduser, $this->imagen, $this->titulo, $this->subtitulo, $this->contenido);
         $db->ejecutar_pdo($query, $parametros);
         $db->cerrar();
     }
+} 
 
 
+class Clasificaciones {
+    public $idclasificacion;
+    public $nombre;
+    
+    public function __construct()   {
 
-}   
+    }
+
+    public function listar()    {
+        $db = new conexionDB();
+        $query = "select idclasificacion, nombre from clasificaciones order by nombre";
+        $resultado = $db->ejecutar_pdo($query, array());
+        return $resultado;
+    }
+
+
+}
 
 ?>

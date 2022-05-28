@@ -19,7 +19,7 @@
     <?php include 'carousel.php' ?>
     <div class="container">
     <hr>
-
+        <!-- Trae las ultimas 5 noticias existentes -->
         <?php
             $contenido = new Contenido();
             $registros = $contenido->listar();

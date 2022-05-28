@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <div class="card">
-                    <img src="https://investors.togethermoney.com/sites/together-finance/files/together-finance/together-investor-portal/investor-portal.jpg"
+                    <img src="https://picsum.photos/432/100"
                         class="card-img-top" alt="Login">
                     <div class="card-body">
                         <h5 class="card-title">Acceso</h5>

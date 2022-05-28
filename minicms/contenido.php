@@ -16,9 +16,7 @@
 </head>
 <body>
     <?php include 'header.php' ?>
-    <div class="container">
     <hr>
-
         <?php
             $contenido = new Contenido();
             if (isset($_GET["idcontenido"])) {
@@ -35,18 +33,20 @@
                 $contenido->apellido = $_POST["apellido"];
             }
         ?>
+
                 <div class="row">
-                    
-                    <div class="col-sm-10" style="margin-left: 10%">
-                        <div class="well">
-                            <img src="<?php echo $contenido->imagen?>" width="1463" height="263"> 
-                            <h1 style="text-align: left ; font-family: Candara"><?php echo $contenido->titulo?></h1>
-                            <h1 style="text-align: left ; font-family: Candara"><?php echo $contenido->clasificacion?></h1>
-                            <h3><?php echo  $contenido->subtitulo?></h3>
-                            <h6 align="justify"><?php echo  $contenido->nombre." ".$contenido->apellido ?></h6>
-                            <h5><?php echo $contenido->contenido?></h5>
-                        </div>
-                    </div>
+                    <img src="<?php echo $contenido->imagen?>"  alt="Responsive image" width="1463" height="263">
+                </div>
+                <div class="container">
+                <div class="row mb-5">
+                    <h1 style="text-align: justify;"><?php echo $contenido->titulo?></h1>
+                    <h6><?php echo $contenido->clasificacion?></h4>
+                    <h6 style="text-align: justify;"><?php echo  $contenido->subtitulo?></h3>
+                    <h7 style="text-align: right; font-family: Candara"><?php echo  $contenido->nombre." ".$contenido->apellido ?></h6>
+                    <br>
+                    <br>
+                    <h6 style="text-align: justify;"><b><?php echo $contenido->contenido?></b></h5>
+                </div>
                 </div>
                 <hr>
 

@@ -14,33 +14,32 @@ require_once 'info_contenido.php';
 
 $contenido = new Contenido();
 
+//----------------   EDITAR O AGREGAR NUEVO CONTENIDO
+
 if (isset($_GET["idcontenido"])) {
   $contenido->setIdContenido($_GET["idcontenido"]);
 }
 if (!empty($_POST)) {
   $contenido->setIdContenido($_POST["idcontenido"]);
   $contenido->idclasificacion = $_POST["idclasificacion"];
-  $contenido->autor_idusuario = $_POST["autor_idusuario"];
-  $contenido->imagen = $_POST["imagen"];
-  $contenido->titulo = $_POST["titulo"];
-  $contenido->subtitulo = $_POST["subtitulo"];
-  $contenido->contenido = $_POST["contenido"];
-  $contenido->modificar();
-
-    header("Location: contenidos.php");
+  $contenido->imagen          = $_POST["imagen"];
+  $contenido->titulo          = $_POST["titulo"];
+  $contenido->subtitulo       = $_POST["subtitulo"];
+  $contenido->contenido       = $_POST["contenido"];
+  
+  if ($_POST["idcontenido"] == 0){
+    $contenido->agregar($_SESSION['usuario']);
+  } else {
+    $contenido->modificar();
   }
 
+    header("Location: contenidos.php");
+}
 
-  if(isset($_POST['agregar'])){
-    $idclasificacion  = $_POST['idclasificacion'];
-    $idusuario        = $_SESSION['usuario'];
-    $imagen           = $_POST['imagen'];
-    $titulo           = $_POST['titulo'];
-    $subtitulo        = $_POST['subtitulo'];
-    $contenido        = $_POST["contenido"];
-    agregar();
-    }
-
+//-------------Listar clasificaciones
+$clasificacion =  new Clasificaciones();
+$seleccionClasificaciones = $clasificacion->listar();
+$idclasificacion = $contenido->idclasificacion;
 ?>
 
 <!doctype html>
@@ -73,12 +72,29 @@ if (!empty($_POST)) {
         <br>
         <div class="form-group">
           <label for="exampleFormControlSelect1"><b>Clasificación</b></label>
-          <input type="text" class="form-control" id="idclasificacion" name="idclasificacion" value="<?php echo $contenido->idclasificacion ?>">
+        </div>
+        <div>
+          <select class="form-select" required arial-label="select example" id="idclasificacion" name="idclasificacion">
+            <option  value="">
+            <?php
+            foreach ($seleccionClasificaciones as $key => $value) {
+                $selected = "";
+                if ($value["idclasificacion"] == $idclasificacion)  {
+                    $selected = "selected";
+                }
+                echo "<option value='".$value["idclasificacion"]."' ".$selected.">".$value["nombre"]."</option>";
+            }
+            ?>  
+          
+            </option>
+          </select>
         </div>
         <br>
+        <div>
           <label for="formGroupExampleInput"><b>Imagen</b></label>
           <input type="url" class="form-control" id="imagen" name="imagen" placeholder="URL de imágen"  value="<?php echo $contenido->imagen ?>">
         <br>
+            </div>
         <div class="form-group">
           <label for="formGroupExampleInput"><b>Título</b></label>
           <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del Contenido"  value="<?php echo $contenido->titulo ?>">
@@ -108,18 +124,35 @@ if (!empty($_POST)) {
 
 <div class="container p-3 my-3 border" style="width:50%" id="container">
     <form method="post">
-    <input type="hidden" name="idcontenido">
+    <input type="hidden" name="idcontenido" value="0">
       <div class="form">
         <h4>Contenido</h4>
         <br>
         <div class="form-group">
           <label for="exampleFormControlSelect1"><b>Clasificación</b></label>
-          <input type="text" class="form-control" id="idclasificacion" name="idclasificacion">
+        </div>
+        <div>
+          <select class="form-select" required arial-label="select example" id="idclasificacion" name="idclasificacion">
+            <option selected value="">Elija Clasificación </option>
+            <?php 
+
+              $clasificacion =  new Clasificaciones();
+              $listar = $clasificacion->listar();
+              while ($reg = $listar->fetch_assoc()){
+              ?>
+
+              <option value="<?php echo $reg["idclasificacion"] ?>" name="<?php echo $reg["idclasificacion"] ?>"><?php echo $reg["nombre"] ?></option>
+          
+            <?php } ?>
+          </select>
         </div>
         <br>
+        <br>
+        <div>
           <label for="formGroupExampleInput"><b>Imagen</b></label>
           <input type="url" class="form-control" id="imagen" name="imagen" placeholder="URL de imágen">
         <br>
+        </div>
         <div class="form-group">
           <label for="formGroupExampleInput"><b>Título</b></label>
           <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del Contenido">

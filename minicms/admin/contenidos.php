@@ -46,7 +46,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <img src="<?php echo $reg["imagen"]?>" width="302" height="81"> 
+                            <img src="<?php echo $reg["imagen"]?>" width="302" height="81" alt="Responsive image"> 
                             <div class ="card-title">
                                 <h2>
                                     <br>
